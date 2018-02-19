@@ -1,0 +1,85 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+	<br>
+	<div class="page-header">
+            <h5>Details of <b class="lead bl"><i>{{first_name}} {{last_name}}</i></b></h5>
+
+            <p class="lead"></p>
+        </div>
+        <hr><br>
+</div>
+
+<div *ngIf="approve_status && userStatus=='Approved'" class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<ngb-alert type="success" [dismissible]="false">{{approve_msg}}</ngb-alert>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="user_deny_status && userStatus=='Denied'" class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<ngb-alert type="danger" [dismissible]="false">User id Denied</ngb-alert>
+		</div>
+	</div>
+</div>
+
+<div *ngFor="let us of DataArr" class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<h6>Name: <b>{{us.fName}} {{us.lName}}</b></h6>
+		</div>
+		<div class="col-md-3">
+			<p>Date of Birth: <b>{{us.dob | date}}</b></p>
+		</div>
+		<div class="col-md-3">
+			<p>City: <b>{{us.city}}, {{us.state}}</b></p>
+		</div>
+		<div class="col-md-3">
+			<p>Country: <b>{{us.country}}</b></p>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			Address: <b>{{us.address}}</b>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+	<div class="col-md-4">
+			Registered Date: <b>{{us.createdDate | date}}</b>
+		</div>
+		<div class="col-md-3">
+			<p>Status: <b><mark>{{us.userStatus}}</mark></b></p>
+		</div>
+		<div class="col-md-5">
+			<h6 class="lead"><i class="fa fa-usd" aria-hidden="true"> <b>{{us.primaryAccount.accountBalance}}</b></i></h6>
+		</div>
+	</div>
+	
+	<div class="form-row">
+		<div *ngIf="account_num==0" class="col-md-8">
+			<form novalidate #f="ngForm" class="form-inline">
+				 <div class="form-group mb-2">
+    					<label for="actNum" class="sr-only">Account</label>
+    					<input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Assign Act Num">
+  				</div>
+				<div class="form-group mx-sm-3 mb-2">
+   					 <label for="inputPassword2" class="sr-only">Password</label>
+   					 <input type="text" class="form-control" id="inputActNum" placeholder="Account Number" [(ngModel)]="model_actNum" name="act" #act=ngModel>
+  				</div>
+  				<button type="submit" class="btn btn-success mb-2" (click)="assignActNum()">Assign Account Number</button>
+			</form>
+		</div>
+		<div *ngIf="account_num != 0" class="col-md-3">
+		<p>Account Number: <b>{{us.primaryAccount.accountNumber}}</b></p>
+		</div>
+	</div>
+	
+	<hr>
+	<input type="button" class="btn btn-success" (click)="approveUser()" value="Approve">
+	<input type="button" class="btn btn-danger" (click)="denyUser()" value="Deny">
+</div>	

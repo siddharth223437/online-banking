@@ -1,0 +1,60 @@
+<app-navbar></app-navbar>
+<div class="container">
+	  <div class="page-header">
+            <h1>Schedule Appointment</h1>
+
+            <p class="lead">Fill the below information to Schedule Appointment</p>
+        </div>
+        <hr style="background-color: blue;"><br>
+</div>
+
+<div *ngIf="app_sts" class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<ngb-alert type="success" [dismissible]="false">{{app_msg}}</ngb-alert>
+		</div>
+	</div>
+</div>
+<div *ngIf="app_sts==false" class="container">
+	<div class="row">
+		<div class="col-md-5">
+			<ngb-alert type="danger" [dismissible]="false">{{app_msg}}</ngb-alert>
+		</div>
+	</div>
+</div>
+
+<div class = "container">
+<form novalidate #f="ngForm">
+	<div class="row">
+		<div class=" form-group col-md-3">
+			<label for="inputmoney" class="lead">Name</label>
+			<input type=text class="form-control" [(ngModel)]="model.name" name="mondepo">
+		</div>
+		<div  class=" form-group col-md-3">
+			<label for="inputscttype" class="lead text-right">Account Number</label>
+			<input type=text class="form-control lead text-primary" [(ngModel)]="model.accountNum" name="actNum" readonly style="background-color: #f5efdf; font-style: bold;">
+		</div>
+	</div>
+	
+		<div class="row">
+		<div class="form-group col-md-3">
+			<label class="lead">Appointment Date</label>
+			<input [(ngModel)]="model.appointDate" name="appDate" [owlDateTime]="dt1" readonly><span class="trigger" [owlDateTimeTrigger]="dt1"> <i class="fa fa-calendar fa-2x"></i></span>
+			<owl-date-time #dt1></owl-date-time>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class=" form-group col-md-6">
+			<label for="inputmoney" class="lead">Reason</label>
+			<textarea id="textarea" rows="3" class="form-control" [(ngModel)]="model.reason" name="reason"></textarea>
+		</div>
+	</div>
+	
+  
+  <br>
+	
+	<input type="button" class="btn btn-success" (click)="createAppointment()"  value="Schedule">&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" class="btn btn-warning" (click)="viewUserApp()" value="Show Appointment">
+</form>
+</div>

@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+<div class="container">
+	  <div class="page-header">
+            <h1>Money Withdrw Form</h1>
+
+            <p class="lead">Fill the below information to add a product:</p>
+        </div>
+        <hr style="background-color: blue;"><br>
+</div>
+
+<div *ngIf="withdrw_sts" class="container">
+	<div class="row">
+		<div class="col-md-5">
+			<ngb-alert type="success" [dismissible]="false">{{withdraw_msg}}</ngb-alert>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="withdrw_sts==false" class="container">
+	<div class="row">
+		<div class="col-md-5">
+			<ngb-alert type="warning" [dismissible]="false">{{withdraw_msg}}</ngb-alert>
+		</div>
+	</div>
+</div>
+
+<div class = "container">
+<form novalidate #f="ngForm">
+	<div class="row">
+		<div class=" form-group col-md-3">
+			<label for="inputmoney" class="lead">Money to Deposit</label>
+			<input type=text class="form-control" name="mondepo" [(ngModel)]="model.amount">
+		</div>
+		<div  class=" form-group col-md-3">
+			<label for="inputscttype" class="lead text-right">Account Number</label>
+			<input type=text class="form-control lead text-primary"  [(ngModel)]="model.actNum" name="actNum" readonly style="background-color: #f5efdf; font-style: bold;">
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="form-group col-md-3">
+			<label class="lead">Account Type</label>
+			<select class="form-control" [(ngModel)]="model.acttype" name="acttyp">
+  				<option value="">Default select</option>
+  				<option *ngFor="let act of actType" class="lead">
+					{{act}}
+  				</option>
+			</select>
+		</div>
+	</div><br>
+	<input type="button" class="btn btn-success" (click)="withdrwa()" value="Withdraw">&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" class="btn btn-warning" value="Back">
+</form>
+</div>

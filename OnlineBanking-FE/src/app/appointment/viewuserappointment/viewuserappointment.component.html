@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+<div class="container">
+	  <div class="page-header">
+            <h1>My Appointment</h1>
+
+            <p class="lead">All My Appointment Details</p>
+        </div>
+        <hr style="background-color: blue;"><br>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+   		<thead>
+   			<tr>
+   				<th>Appointment Date</th>
+   				<th>Name</th>
+   				<th>Reason</th>
+   				<th>Status</th>
+   			</tr>
+   		</thead>
+   		<tbody class="thead-inverse dtcol">
+   			<tr *ngFor="let app of userApp | paginate: { itemsPerPage: 7, currentPage: p}">
+   				<td><h5 class="lead text-info fw"><small>{{app.appointmentDate | date:'medium'}}</small></h5></td>
+   				<td><h5 class="lead text-info fw"><small>{{app.name}}</small></h5></td>
+   				<td><h5 class="lead text-info fw"><small>{{app.reason}}</small></h5></td>
+   				<td><h5 class="lead text-info fw"><small>{{app.status}}</small></h5></td>
+   				<td (click)="cancelAppointment(app.id)"><a routerLink ="/userappointent" class="del"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
+   			</tr>
+   		</tbody>
+   </table>
+   <pagination-controls (pageChange)="p = $event"></pagination-controls>
+		</div>
+	</div>
+
+</div>

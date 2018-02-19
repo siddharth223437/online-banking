@@ -1,0 +1,58 @@
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center text-white mb-4">Fish Bank</h2>
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <span class="anchor" id="formLogin"></span>
+                    
+                    <div *ngIf="login_status=='false'" class="alert alert-danger" role="alert">
+                    			User is not in active state
+                    </div>
+                    <div *ngIf="login_error_sts==true" class="alert alert-warning" role="alert">
+                    			{{login_error}}
+                    </div>
+
+                    <!-- form card login -->
+                    <div class="card rounded-0">
+                        <div class="card-header">
+                            <h3 class="mb-0">Login</h3>
+                        </div>
+                        <div class="card-body">
+                            <form novalidate #f="ngForm" class="form" role="form" autocomplete="off" id="formLogin">
+                                <div class="form-group">
+                                    <label for="uname1">Username</label>
+                                    <input type="text" class="form-control form-control-lg rounded-0" name="uname1" id="uname1" [(ngModel)]="model.username" #uname1=ngModel required>
+                                <div *ngIf="uname1.invalid && (uname1.dirty || uname1.touched)" class="alert alert-danger">
+                							<div *ngIf="uname1.errors.required">Username is required</div>
+        							</div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control form-control-lg rounded-0" id="pwd1" name="password" [(ngModel)]="model.password" #password=ngModel required  autocomplete="new-password">
+                                  <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+                							<div *ngIf="password.errors.required">Password is required</div>
+        							</div>
+                                
+                                </div>
+                                <button type="button" class="btn btn-success btn-lg float-left" (click)="login()" [disabled]="f.invalid">Login</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                 <button type="button" class="btn btn-warning btn-lg" (click)="Register()">Register</button>
+                            </form>
+                        </div>
+                        <!--/card-block-->
+                    </div>
+                    <!-- /form card login -->
+
+                </div>
+
+
+            </div>
+            <!--/row-->
+
+        </div>
+        <!--/col-->
+    </div>
+    <!--/row-->
+</div>
+<!--/container-->
+<pre>{{f.value | json}}</pre>

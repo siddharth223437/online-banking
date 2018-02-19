@@ -1,0 +1,131 @@
+
+
+<div class="container">
+	  <div class="page-header">
+            <h1>Register Form</h1>
+
+            <p class="lead">Fill the below information to add a product:</p>
+        </div>
+        <hr><br>
+        
+        <div *ngIf="userRegisterStatus==false" class="alert alert-danger" role="alert">User {{model.username}} already exists</div>
+        <div *ngIf="userRegisterStatus" class="alert alert-success" role="alert">Thank you Registration</div>
+	
+	<form novalidate #f="ngForm">
+	<div class="form-row">
+    <div class="form-group col-md-5">
+      <label for="inputusername">User Name</label>
+      <input type="text" class="form-control" id="username" placeholder="User Name" name="username" [(ngModel)]="model.username" #username=ngModel required>
+      	<div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
+                		<div *ngIf="username.errors.required">Username is required</div>
+                		
+         </div>
+    </div>
+    <div class="form-group col-md-5">
+      <label for="inputPassword4">Password</label>
+      <input type="password" class="form-control" id="upass" placeholder="Password" [(ngModel)]="model.passsword" name="password" #password=ngModel required >
+      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+                		<div *ngIf="password.errors.required">Password is required</div>
+         </div>
+  </div>
+  </div>
+  
+  <div class="form-row">
+    <div class="form-group col-md-5">
+      <label for="inputfname">First Name</label>
+      <input type="text" class="form-control" id="fname" placeholder="First Name" [(ngModel)]="model.fName" name="fName" #fName=ngModel required>
+      <div *ngIf="fName.invalid && (fName.dirty || fName.touched)" class="alert alert-danger">
+                		<div *ngIf="fName.errors.required">First Name is required</div>
+         </div>
+    </div>
+    <div class="form-group col-md-5">
+      <label for="inputLName">Last Name</label>
+      <input type="text" class="form-control" id="llast" placeholder="Last Name" [(ngModel)]="model.lName" name="lName" #lName=ngModel required>
+      <div *ngIf="lName.invalid && (lName.dirty || lName.touched)" class="alert alert-danger">
+                		<div *ngIf="lName.errors.required">Last Name is required</div>
+         </div>
+    </div>
+  </div>
+  
+  <div class="row">
+  	<div class="form-group col-md-10">
+  		 <label for="inputAddress">Address</label>
+  		 <input type="text" class="form-control" id="addr" placeholder="Address" [(ngModel)]="model.address" name="address" #address=ngModel required>
+  		 <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
+                		<div *ngIf="address.errors.required">Address is required</div>
+         </div>
+  	</div> 
+  </div>
+  
+  	<div class="form-row">
+  		<div class="form-group col-md-2">
+  			 <label for="inputAddress">Country</label>
+  			 <input type="text" class="form-control" id="country" placeholder="Country" [ngbTypeahead]="searchCountry" [(ngModel)]="model.country" name="country" #country=ngModel required>
+  		      <div *ngIf="country.invalid && (country.dirty || country.touched)" class="alert alert-danger">
+                		<div *ngIf="address.errors.required">Country is required</div>
+         </div>
+  		</div>
+  		<div class="form-group col-md-4">
+  			 <label for="inputAddress">State</label>
+  			 <input type="text" class="form-control" id="state" placeholder="State" [ngbTypeahead]="searchState" [(ngModel)]="model.state" name="state" #state=ngModel required>
+  		       <div *ngIf="state.invalid && (state.dirty || state.touched)" class="alert alert-danger">
+                		<div *ngIf="state.errors.required">State is required</div>
+         </div>
+  		</div>
+  		<div class="form-group col-md-4">
+  			 <label for="inputAddress">City</label>
+  			 <input type="text" class="form-control" id="city" placeholder="City" [ngbTypeahead]="searchCity" [(ngModel)]="model.city" name="city" #city=ngModel required>
+  		     <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+                		<div *ngIf="city.errors.required">City is required</div>
+         </div>
+  		
+  		</div>
+  	</div>
+  	
+  	<div class="form-row">
+    <div class="form-group col-md-5">
+      <label for="inputfname">Phone Number</label>
+      <input type="text" class="form-control" id="pnom" placeholder="Phone Number" [(ngModel)]="model.phoneNumber" name="phoneNumber" #phoneNumber=ngModel required>
+      <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="alert alert-danger">
+                		<div *ngIf="phoneNumber.errors.required">Phone Number is required</div>
+         </div>
+    </div>
+    <div class="form-group col-md-5">
+      <label for="inputLName">SSN</label>
+      <input type="password" class="form-control" id="ssn" placeholder="SSN" [(ngModel)]="model.ssn" name="ssn" #ssn=ngModel required maxlength="9" >
+      <div *ngIf="ssn.invalid && (ssn.dirty || ssn.touched)" class="alert alert-danger">
+                		<div *ngIf="ssn.errors.required">SSN is required</div>
+         </div>
+    </div>
+  </div>
+  
+  <div class="form-row">
+  	<div class="form-group col-md-3">
+  		<label>Date of Birth</label>
+  		<input type="date" class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model.dob" #dp=ngModel> 
+  		<div *ngIf="dp.invalid && (dp.dirty || dp.touched)" class="alert alert-danger">
+                		<div *ngIf="dp.errors.required">Date of Birth is required</div>
+         </div>
+  		</div>
+  		<div class="form-group col-md-3">
+  		<label>Email</label>
+  		<input type="email" class="form-control" placeholder="Email" name="ema" [(ngModel)]="model.email" #ema=ngModel> 
+  		<div *ngIf="ema.invalid && (ema.dirty || ema.touched)" class="alert alert-danger">
+                		<div *ngIf="ema.errors.required">Email is required</div>
+         </div>
+  		</div>
+  	</div>
+
+  
+  <div class="form-check">
+    <label class="form-check-label">
+      <input type="checkbox" class="form-check-input">
+      Have read Bank's Policy
+    </label>
+    </div>
+  </form><br>
+	<input type="button" class="btn btn-success" (click)="register()" value="Register" [disabled]="f.invalid">&nbsp;&nbsp;&nbsp;
+	<input type="button" class="btn btn-warning" (click)="Reset()" value="Reset">&nbsp;&nbsp;&nbsp;
+	<input type="button" class="btn btn-danger" (click)="Cancel()" value="Cancel">
+</div>
+<pre>{{f.value | json}}</pre>

@@ -1,0 +1,19 @@
+.dtcol{
+	background-color: #D1E6ED;
+}
+
+/* #for edit */
+.ed{
+	color: green;
+}
+.ed:hover {
+	color: green;
+}
+
+/* for delete */
+.del{
+	color: red;
+}
+.del:hover {
+	color: red;
+}

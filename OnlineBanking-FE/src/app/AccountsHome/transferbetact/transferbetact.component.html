@@ -1,0 +1,70 @@
+<app-navbar></app-navbar>
+<div class="container">
+	  <div class="page-header">
+            <h1>Transfer Between Account Form</h1>
+
+            <p class="lead">Fill the below information to star transfer</p>
+        </div>
+        <hr style="background-color: blue;"><br>
+</div>
+
+
+<div *ngIf="transefr_sts" class="container">
+	<div class="row">
+		<div class="col-md-5">
+			<ngb-alert type="success" [dismissible]="false">Transfered Succesful</ngb-alert>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="transefr_sts==false" class="container">
+	<div class="row">
+		<div class="col-md-5">
+			<ngb-alert type="danger" [dismissible]="false">{{transfer_msg}}</ngb-alert>
+		</div>
+	</div>
+</div>
+
+
+
+<div class = "container">
+<form novalidate #f="ngForm">
+	<div class="row">
+		<div class=" form-group col-md-3">
+			<label for="inputmoney" class="lead">Money to Transfer</label>
+			<input type=text class="form-control" name="mondepo" [(ngModel)]="model.amount">
+		</div>
+		<div  class=" form-group col-md-3">
+			<label for="inputscttype" class="lead text-right">Account Number</label>
+			<input type=text class="form-control lead text-primary" [(ngModel)]="model.actNum" name="actNum" readonly style="background-color: #f5efdf; font-style: bold;">
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="form-group col-md-3">
+			<label class="lead">Transfer From</label>
+			<select class="form-control" [(ngModel)]="selectedAccount" (change)="onSelect($event.target.value)" name="acttyp1">
+  				<option value="0">Select Account</option>
+  				<option *ngFor="let act of accounts" value= {{act.id}} class="lead">
+					{{act.name}}
+  				</option>
+			</select>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="form-group col-md-3">
+			<label class="lead">Transfer To</label>
+			<select class="form-control" [(ngModel)]="model.act2" name="acttyp2">
+  				<option *ngIf="model.act1" value ="0"></option>
+  				<option *ngFor="let selAct of basedOnActDrop" value = {{selAct.name}} class="lead">
+					{{selAct.name}}
+  				</option>
+			</select>
+		</div>
+	</div>
+	<br>
+	<input type="button" class="btn btn-success"  value="Transfer" (click)="Transfer()">&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="button" class="btn btn-warning" value="Back">
+</form>
+</div>

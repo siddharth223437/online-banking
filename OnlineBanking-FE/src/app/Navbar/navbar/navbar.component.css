@@ -1,0 +1,17 @@
+nav{
+	background-color: #f5efdf;
+}
+.nav-tex{
+	color: white;
+}
+
+a:hover {
+	color: #e694a8;
+}
+a{
+	color: #7298f5;
+}
+
+.fea{
+	color: red;
+}

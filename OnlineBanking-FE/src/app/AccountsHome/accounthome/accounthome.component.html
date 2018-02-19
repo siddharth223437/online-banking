@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+<div class="container">
+	<div class="page-header">
+            <h5 class= "head-col">Personal Accounts</h5> 
+        </div>
+        <hr style="background-color: blue;">
+        <div *ngFor="let us of user_arr" class="container">
+  	
+  	<div class="row">		
+  <div class="col-sm-6">
+  	<div class="card text-center colcr">
+    <div class="card-body">
+      <h5 class="card-title text-center text-info par">Primary Account</h5><br>
+      <p class="card-text text-center lead par"><i class="fa fa-usd" aria-hidden="true"></i> {{us.primaryAccount.accountBalance}}</p>
+    </div>
+  <div class="card-footer">
+      <small class="text-muted text-center">{{us.lastLogedIn | date:'medium'}}</small>
+    </div>
+    	</div>
+  </div>
+ 
+  <div class="col-sm-2"></div>
+  
+  <div class="col-sm-4">
+  <div class="card text-center colcr">
+  <div class="card-body">
+    <h5 class="card-title text-center text-success par"><i class="fa fa-ticket fa-3x" aria-hidden="true"></i> Go to Deposit</h5>
+    <a routerLink ="/deposit" class="btn btn-success">Deposit</a>
+  </div>
+</div>
+</div>
+
+  </div>
+   <input type ="button" class="btn btn-info" (click)="primaryTransactionList()" value="view transactions">
+  
+  <br><br>
+  
+  <div class="row">
+  	<div class="col-sm-6">
+  		<div class="card colcr">
+ 
+    <div class="card-body">
+     <h5 class="card-title text-center text-info par">Savings Account</h5><br>
+     <p class="card-text text-center lead par"><i class="fa fa-usd" aria-hidden="true"></i> {{us.savingsAccount.accountBalance}}</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted text-center">{{us.lastLogedIn | date:'medium'}}</small>
+    </div>
+  </div>
+  	</div>
+  	
+  	<div class="col-sm-2"></div>
+  	
+  	<div class="col-sm-4">
+  <div class="card text-center colcr">
+  <div class="card-body">
+    <h5 class="card-title text-center text-danger par"><i class="fa fa-money fa-2x" aria-hidden="true"></i> Go to Withdraw</h5>
+    <a href="#" class="btn btn-danger">Withdraw</a>
+  </div>
+</div>
+</div>
+  </div>
+   <input type ="button" class="btn btn-info" value="view transactions" (click)="savingsTransactionList()">
+  
+		</div>
+</div>
+
+

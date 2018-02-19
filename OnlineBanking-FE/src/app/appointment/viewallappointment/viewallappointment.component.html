@@ -1,0 +1,180 @@
+<app-navbar></app-navbar>
+<div class="container">
+	  <div class="page-header">
+            <h1>All Appointment</h1>
+
+            <p class="lead">All Appointment Details, You can approve/deny appointments</p>
+        </div>
+        <hr style="background-color: blue;"><br>
+</div>
+
+<div *ngIf="search_sts==false" class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<ngb-alert type="success" [dismissible]="false">{{search_msg}}</ngb-alert>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<form (ngSubmit) = "search()" novalidate #f="ngForm">
+	<div class="form-row">
+	
+		<div class="form-group col-md-3">
+			<input [(ngModel)]="model.appointmentDate" name="dat1" class="form-control" placeholder="Search By Date" [owlDateTimeTrigger]="dt6" [owlDateTime]="dt6"> <owl-date-time [pickerType]="'calendar'"[startView]="'year'" #dt6></owl-date-time>
+      </div>
+		    
+		
+		
+		<div class="form-group col-md-3">
+				<input type="text" placeholder="Search By Name" [(ngModel)]="model.name" name="na" class="form-control">
+		</div>
+		
+		<div class="form-group col-md-3">
+				<input type="text" placeholder="Search By Status" [(ngModel)]="model.status" name="stats" class="form-control">
+		</div>
+		
+		<div class="form-group col-md-3">
+				<input type="submit" class="btn btn-primary form-control" value="Search">
+		</div>
+	</div>
+	</form>
+<br>
+<!-- For Seatch result -->
+<div *ngIf="showTables==false" class="row">
+		<div class="col-md-12">
+			<table class="table">
+   		<thead>
+   			<tr>
+   				<th>Appointment Date</th>
+   				<th>Name</th>
+   				<th>Reason</th>
+   				<th>Status</th>
+   			</tr>
+   		</thead>
+   		<tbody class="thead-inverse dtcol">
+   			<tr *ngFor="let result of searchResult">
+   				<td><h5 class="lead text-info fw"><small>{{result.appointmentDate | date:'medium' | uppercase}}</small></h5></td>
+   				<td><h5 class="lead text-info fw"><small>{{result.name | uppercase}}</small></h5></td>
+   				<td><h5 class="lead text-info fw"><small>{{result.reason | uppercase}}</small></h5></td>
+   				<td><h5 class="lead text-info fw"><small>{{result.status | uppercase}}</small></h5></td>
+   				<td (click)="editAppointment(result.id)"><a routerLink = "/allappointments"  (click)="open(content)" class="ed"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a>
+   					<div >
+			<ng-template #content let-c="close" let-d="dismiss">
+  				<div class="modal-header">
+    					<div class="page-header">
+            				<h1>Edit Form</h1>
+            					<p class="lead">Fill the below information to edit Appointment:</p>
+        					</div>
+    						<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      						<span aria-hidden="true">&times;</span>
+    						</button>
+  				</div>
+  				<div class="modal-body">
+    					<div class="container">
+	  
+	<form novalidate #f="ngForm">
+	<div class="form-row">
+    <div class="form-group col-md-5">
+      <label for="inputusername">Account Number</label>
+      <input type="text" class="form-control" id="actNum" placeholder="Account Number" name="actNum" [(ngModel)]="model.accountNumber" #username=ngModel required readonly>
+      	<div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
+                		<div *ngIf="username.errors.required">Account Number is required</div>
+                		
+         </div>
+    </div>
+  </div>
+  
+  <div class="form-row">
+    <div class="form-group col-md-5">
+      <label for="inputfname">Name</label>
+      <input type="text" class="form-control" id="fname" placeholder="Name" [(ngModel)]="model.name" name="fName" #fName=ngModel required>
+      <div *ngIf="fName.invalid && (fName.dirty || fName.touched)" class="alert alert-danger">
+                		<div *ngIf="fName.errors.required">Name is required</div>
+         </div>
+    </div>
+    <div class="form-group col-md-5">
+      <label for="inputLName">Appointment Date</label>
+      <input type="text" class="form-control" id="llast" placeholder="Appointment Date" [ngModel]="model.appointmentDate | date: 'medium'" name="lName" #lName=ngModel required>
+      <div *ngIf="lName.invalid && (lName.dirty || lName.touched)" class="alert alert-danger">
+                		<div *ngIf="lName.errors.required">Appointment Date is required</div>
+         </div>
+    </div>
+  </div>
+  
+  <div class="row">
+  	<div class="form-group col-md-10">
+  		 <label for="inputAddress">Status</label>
+  		 <input type="text" class="form-control" id="addr" placeholder="Status" [(ngModel)]="model.status" name="address" #address=ngModel required>
+  		 <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger">
+                		<div *ngIf="address.errors.required">Status is required</div>
+         </div>
+  	</div> 
+  </div>
+  
+  	<div class="form-row">
+  		<div class="form-group col-md-2">
+  			 <label for="inputAddress">reason</label>
+  			 <input type="text" class="form-control" id="country" placeholder="Reason" [(ngModel)]="model.status" name="country" #country=ngModel required>
+  		      <div *ngIf="country.invalid && (country.dirty || country.touched)" class="alert alert-danger">
+                		<div *ngIf="address.errors.required">Status is required</div>
+         </div>
+  		</div>
+  		</div>
+  </form><br>
+	<input type="button" (click)="d('Cross click')" class="btn btn-success" (click)="update()" value="Update">&nbsp;&nbsp;&nbsp;
+	<input type="button" class="btn btn-danger"  value="Cancel" (click)="d('Cross click')">
+</div>
+  				</div>
+  				<div class="modal-footer">
+    					<button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  				</div>
+			</ng-template>
+			</div>
+   				
+   				
+   				</td>
+   				 <td><a routerLink ="/admin" ><i class="fa fa-check fa-2x"></i></a></td>
+			    <td (click)="cancelAppointment(result.id)"><a routerLink ="/allappointments" class="del"><i class="fa fa-ban fa-2x"></i></a></td>
+			    <td (click)="deleteAppointment(result.id)"><a routerLink ="/allappointments" class="del"><i class="fa fa-trash-o fa-2x"></i></a></td>
+   			</tr>
+   		</tbody>
+   </table>
+		</div>
+		<div class="form-group col-md-2">
+				<input type="button" (click)="back()" class="btn btn-success form-control" value="Back">
+		</div>
+	</div>
+
+
+<!-- For All tables -->
+
+	<div *ngIf="showTables" class="row">
+		<div class="col-md-12">
+			<table class="table">
+   		<thead>
+   			<tr>
+   				<th>Appointment Date</th>
+   				<th>Name</th>
+   				<th>Reason</th>
+   				<th>Status</th>
+   			</tr>
+   		</thead>
+   		<tbody class="thead-inverse dtcol">
+   			<tr *ngFor="let app of allApp | paginate: { itemsPerPage: 7, currentPage: p}">
+   				<td><h5 class="lead text-info fw"><small>{{app.appointmentDate | date:'medium' | uppercase}}</small></h5></td>
+   				<td><h5 class="lead text-info fw"><small>{{app.name | uppercase}}</small></h5></td>
+   				<td><h5 class="lead text-info fw"><small>{{app.reason | uppercase}}</small></h5></td>
+   				<td><h5 class="lead text-info fw"><small>{{app.status | uppercase}}</small></h5></td>
+   				<td (click)="findAppointment(app.id)"><a routerLink = "/allappointments"   class="ed"><i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i></a></td>
+   				 <td (click)="approveAppointment(app.id)"><a routerLink ="/allappointments" ><i class="fa fa-check fa-2x"></i></a></td>
+			    <td (click)="cancelAppointment(app.id)"><a routerLink ="/allappointments" class="del"><i class="fa fa-ban fa-2x"></i></a></td>
+			    <td (click)="deleteAppointment(app.id)"><a routerLink ="/allappointments" class="del"><i class="fa fa-trash-o fa-2x"></i></a></td>
+   			</tr>
+   		</tbody>
+   </table>
+   <pagination-controls (pageChange)="p = $event"></pagination-controls>
+		</div>
+	</div>
+
+</div>

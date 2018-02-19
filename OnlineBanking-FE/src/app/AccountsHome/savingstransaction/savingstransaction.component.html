@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+<div class="container">
+	<div class="page-header">
+            <h5 class= "head-col">Personal Accounts</h5> 
+        </div>
+        <hr style="background-color: blue;">
+</div> 
+
+<div *ngFor="let us of user_arr" class="container">
+<div class="row">
+	<div class="col-sm-8"></div>
+	
+	<div class="col-sm-4">
+		<div class="card text-center colcr">
+    <div class="card-body">
+      <h5 class="card-title text-center text-info par">Savings Account</h5><br>
+      <p class="card-text text-center lead par"><i class="fa fa-usd" aria-hidden="true"></i> {{us.savingsAccount.accountBalance}}</p>
+    </div>
+  <div class="card-footer">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </div>
+    	</div>
+	</div>
+</div>
+<br>
+<div class="row">
+	<table class="table">
+   		<thead>
+   			<tr>
+   				<th>Transaction Date</th>
+   				<th>Account Type</th>
+   				<th>Amount</th>
+   				<th>Available Balance</th>
+   				<th>Description</th>
+   				<th>Status</th>
+   			</tr>
+   		</thead>
+   		<tbody class="thead-inverse dtcol">
+   			<tr *ngFor="let tran of transactionArr | paginate: { itemsPerPage: 7, currentPage: p}">
+   				<td><h5 class="lead text-info fw"><small>{{tran.date| date | uppercase}}</small></h5></td>
+   				<td><h5 class="lead text-info fw"><small>{{tran.type | uppercase}}</small></h5></td>
+   				<td><h5 class="lead text-info fw"><small>{{tran.amount}}</small></h5></td>
+   				<td><h5 class="lead text-info fw"><small>{{tran.availableBalance}}</small></h5></td>
+   				<td><h5 class="lead text-info fw"><small>{{tran.description | uppercase}}</small></h5></td>
+   				<td><h5 class="lead text-info fw"><small>{{tran.status | uppercase}}</small></h5></td>
+   			</tr>
+   		</tbody>
+   </table>
+   <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+</div>
+
+      

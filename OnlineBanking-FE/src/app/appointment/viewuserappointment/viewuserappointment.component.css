@@ -1,0 +1,43 @@
+.row-color{
+	background-color: #D3D3D3;
+	width: 45%;
+	height: 100%;
+}
+.act-col{
+	
+	width: 45%;
+}
+p{
+	
+	
+}
+
+.head-col{
+	color: #dcdce0;
+}
+
+.par{
+	height: 50%;
+	font-size: 22px;
+}
+
+.colcr{
+/* 	background-color: #cfcfd0; */
+/* 	background-image: url("/assets/sid1.jpg"); */
+background-color: WHITESMOKE;
+}
+
+.fw{
+	font-weight: normal;
+	color: black;
+	font-family: 'Roboto', serif;
+	
+}
+
+.dtcol{
+	background-color: white;
+}
+
+.del {
+	color: red;
+}
