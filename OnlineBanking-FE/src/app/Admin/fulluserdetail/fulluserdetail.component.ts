@@ -32,6 +32,7 @@ export class FulluserdetailComponent implements OnInit {
   
   showUser() {
     let u_name = this._activatedRoutes.snapshot.params['usname'];
+    sessionStorage.setItem('username', u_name);
     console.log('param ', u_name);
     this.genericService.findOneUserService(u_name).subscribe(
     (resp) => {
@@ -76,6 +77,10 @@ export class FulluserdetailComponent implements OnInit {
       this.showUser();
     }
     );
+  }
+  
+  generateStatement() {
+    this.router.navigate(['/generatestatements']);
   }
 }
 

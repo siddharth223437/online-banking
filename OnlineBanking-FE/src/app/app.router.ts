@@ -10,6 +10,7 @@ import { TransferbetactComponent } from './AccountsHome/transferbetact/transferb
 import { WithdrawComponent } from './AccountsHome/withdraw/withdraw.component';
 import { AdminwelcomeComponent } from './Admin/adminwelcome/adminwelcome.component';
 import { FulluserdetailComponent } from './Admin/fulluserdetail/fulluserdetail.component';
+import { GeneratestatementsComponent } from './Admin/generatestatements/generatestatements.component';
 import { LoggedinuserservicesService } from './AuthGuard/loggedinuserservices.service';
 import { VerifyadminguardService } from './AuthGuard/verifyadminguard.service';
 import { VerifyuserguardService } from './AuthGuard/verifyuserguard.service';
@@ -38,6 +39,7 @@ export const router: Routes = [
   {path: 'appointment', component: AppointmentComponent, canActivate: [LoggedinuserservicesService, VerifyadminguardService]},
   {path: 'userappointent', component: ViewuserappointmentComponent, canActivate: [LoggedinuserservicesService, VerifyadminguardService]},
   {path: 'allappointments', component: ViewallappointmentComponent, canActivate: [LoggedinuserservicesService, VerifyuserguardService]},
+  {path: 'generatestatements', component: GeneratestatementsComponent, canActivate: [LoggedinuserservicesService, VerifyuserguardService]},
   {path: 'error', component: ErrorpageComponent}
 ];
 

@@ -1,6 +1,7 @@
 package com.sid.onlonebanking.vo;
 
 import java.util.Date;
+import java.util.List;
 
 public class PrimaryTransaction {
 	private String username;
@@ -12,9 +13,17 @@ public class PrimaryTransaction {
     private String amount;
     private double availableBalance;
     private Date lastViewed;
-    
-    
-    public Date getLastViewed() {
+    private String newDate;
+
+	public String getNewDate() {
+		return newDate;
+	}
+
+	public void setNewDate(String newDate) {
+		this.newDate = newDate;
+	}
+
+	public Date getLastViewed() {
 		return lastViewed;
 	}
 

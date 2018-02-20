@@ -47,10 +47,16 @@ public class Users implements UserDetails {
 	private PrimaryAccount primaryAccount;
 	private SavingsAccount savingsAccount;
 	private Date lastLogedIn;
+	private List<String> accountStatements;
 	
 	
 	
-	
+	public List<String> getAccountStatements() {
+		return accountStatements;
+	}
+	public void setAccountStatements(List<String> accountStatements) {
+		this.accountStatements = accountStatements;
+	}
 	public Date getLastLogedIn() {
 		return lastLogedIn;
 	}

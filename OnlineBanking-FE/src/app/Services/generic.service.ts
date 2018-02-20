@@ -219,4 +219,12 @@ showWelcomeService(username) {
     );
   }
   
+  generateStatementsService(fromDate, toDate, username) {
+    return this.httpClient.get(this.LocalURL + '/account/generatestatement/' + fromDate + '/' + toDate + '/' + username, {
+    headers: new HttpHeaders().set('Authorization', 'Basic ' + localStorage.getItem('baseToken')),
+    }).map(
+    (response) => response
+    );
+  }
+  
 }

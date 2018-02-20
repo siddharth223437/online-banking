@@ -2,8 +2,12 @@ package com.sid.onlonebanking.controller;
 
 import java.security.Principal;
 import java.security.Timestamp;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -22,6 +26,7 @@ import com.sid.onlonebanking.repository.PrimaryTransactionRepository;
 import com.sid.onlonebanking.repository.SavingsAccountRepository;
 import com.sid.onlonebanking.repository.SavingsTransactionsRepository;
 import com.sid.onlonebanking.repository.UserRepository;
+import com.sid.onlonebanking.service.GenerateStatementService;
 import com.sid.onlonebanking.serviceImpl.UserService;
 import com.sid.onlonebanking.vo.AccountResponse;
 import com.sid.onlonebanking.vo.AccountTransaction;
@@ -41,6 +46,9 @@ public class AccountController {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private GenerateStatementService generateStatementService;
 
 	@Autowired
 	private PrimaryTransactionRepository primaryTransacRepository;
@@ -62,8 +70,18 @@ public class AccountController {
 		return resp;
 	}
 	
+	private String toDate(Date appDate) throws ParseException {
+		DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+		Date date = (Date)formatter.parse(appDate.toString());
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		String formatedDate = cal.get(Calendar.DATE) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR);
+		System.out.println("formatedDate : " + formatedDate);    
+		return formatedDate;
+	}
+	
 	@GetMapping("/deposit/{amount}/{type}")
-	public AccountResponse<AccountTransaction> deposit(Principal principal, @PathVariable("amount") String amount,@PathVariable("type") String type){
+	public AccountResponse<AccountTransaction> deposit(Principal principal, @PathVariable("amount") String amount,@PathVariable("type") String type) throws ParseException{
 		AccountResponse<AccountTransaction> resp = new AccountResponse<>();
 		Users user = userRepository.findByUsername(principal.getName());
 		if(user != null) {
@@ -80,6 +98,8 @@ public class AccountController {
 				Date date = new Date();
 				pt.setAvailableBalance(user.getPrimaryAccount().getAccountBalance());
 				pt.setDate(date);
+				String newDate = toDate(date);
+				pt.setNewDate(newDate);
 				pt.setAmount(amount);
 				pt.setType(type);
 				pt.setDescription("Credit to primary account");
@@ -327,6 +347,16 @@ public class AccountController {
 			resp.setMessage("Money Transfered to Primary Act successful");
 			resp.setStatus(true);
 		}
+		return resp;
+	}
+	
+	@GetMapping("/generatestatement/{fromDate}/{toDate}/{username}")
+	public AccountResponse<List<PrimaryTransaction>> generateStatement(@PathVariable("fromDate") Date fromDate, @PathVariable("toDate") Date toDate, @PathVariable("username") String username){
+		System.out.println(fromDate + "---->"+toDate+"---->"+username);
+		AccountResponse<List<PrimaryTransaction>> resp = new AccountResponse<>();
+		List<PrimaryTransaction> list = primaryTransacRepository.findByusernameAndDateBetween(username,fromDate, toDate);
+		generateStatementService.createPdf(list);
+		resp.setResponseObject(list);
 		return resp;
 	}
 	

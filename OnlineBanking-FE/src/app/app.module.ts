@@ -34,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { ViewuserappointmentComponent } from './appointment/viewuserappointment/viewuserappointment.component';
 import { ViewallappointmentComponent } from './appointment/viewallappointment/viewallappointment.component';
+import { GeneratestatementsComponent } from './Admin/generatestatements/generatestatements.component';
 
 
 
@@ -58,7 +59,8 @@ import { ViewallappointmentComponent } from './appointment/viewallappointment/vi
     AddrecipientComponent,
     AppointmentComponent,
     ViewuserappointmentComponent,
-    ViewallappointmentComponent
+    ViewallappointmentComponent,
+    GeneratestatementsComponent
   ],
   imports: [
     BrowserModule,
