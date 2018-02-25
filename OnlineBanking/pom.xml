@@ -6,7 +6,7 @@
 	<groupId>com.onlinebank</groupId>
 	<artifactId>OnlineBanking</artifactId>
 	<version>0.0.1</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>OnlineBanking</name>
 	<description>Online Banking</description>
@@ -72,12 +72,12 @@
         <groupId>com.h2database</groupId>
         <artifactId>h2</artifactId>
         </dependency>
- <!-- <dependency> 
-     <groupId>org.springframework.boot</groupId> 
-       <artifactId>spring-boot-starter-tomcat</artifactId> 
-        <scope>provided</scope> 
-   </dependency>  -->
-<dependency>
+    <dependency>  
+      <groupId>org.springframework.boot</groupId>  
+     <artifactId>spring-boot-starter-tomcat</artifactId>  
+       <scope>provided</scope>  
+    </dependency>  
+   <dependency>
   <groupId>com.amazonaws</groupId>
   <artifactId>aws-java-sdk</artifactId>
   <version>1.11.106</version>
@@ -113,7 +113,8 @@
                 <activeByDefault>true</activeByDefault>
             </activation> 
             <properties>
-                <mongo.uri>mongodb://localhost/onlinebank</mongo.uri> 
+<!--                 <mongo.uri>mongodb://localhost/onlinebank</mongo.uri>  -->
+					<mongo.uri>mongodb://ec2-18-221-12-199.us-east-2.compute.amazonaws.com</mongo.uri>
             </properties>
         </profile>
         
