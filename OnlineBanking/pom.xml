@@ -104,7 +104,7 @@
       </executions>
     </plugin>
 		</plugins>
-		<finalName>bird</finalName>
+		<finalName>FishBank-1.0</finalName>
 	</build>
   <profiles>
         <!-- localhost environment -->
