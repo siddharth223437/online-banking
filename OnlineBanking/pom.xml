@@ -92,17 +92,25 @@
             </resource>
         </resources>
 		<plugins>
-			<plugin>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-maven-plugin</artifactId>
-      <executions>
-        <execution>
-          <goals>
-            <goal>repackage</goal>
-          </goals>
-        </execution>
-      </executions>
-    </plugin>
+			
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <warSourceDirectory>WebContent</warSourceDirectory>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+            </plugin>
+
 		</plugins>
 		<finalName>FishBank-1.0</finalName>
 	</build>
@@ -114,15 +122,16 @@
                 <activeByDefault>true</activeByDefault>
             </activation> 
             <properties>
-<!--                 <mongo.uri>mongodb://localhost/onlinebank</mongo.uri>  -->
-					<mongo.uri>mongodb://ec2-18-221-12-199.us-east-2.compute.amazonaws.com</mongo.uri>
+                 <mongo.uri>mongodb://localhost/onlinebank</mongo.uri>
+                 <s3.upload>/Users/sid/Documents/upload_1/</s3.upload>
             </properties>
         </profile>
         
         <profile>
             <id>prod</id>
             <properties>
-                <mongo.uri>mongodb://18.218.74.116/storelocator</mongo.uri>
+                <mongo.uri>mongodb://ec2-18-221-12-199.us-east-2.compute.amazonaws.com</mongo.uri>
+                <s3.upload>/var/log/tomcat8/upload/</s3.upload>
             </properties>
         </profile>
 
