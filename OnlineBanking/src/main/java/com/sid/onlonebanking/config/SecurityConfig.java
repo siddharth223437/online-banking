@@ -52,7 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/account/register",
 			"/account/login",
 			"/logout",
-			"/world/country"
+			"/world/country",
+			"/account/test"
 			
 	};
 	

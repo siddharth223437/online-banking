@@ -50,6 +50,11 @@ public class HomeController {
 	@Autowired
 	private SavingsTransactionsRepository savingsTransactionRepo;
 	
+	@GetMapping("/test")
+	public String testName() {
+		return "siddharth";
+	}
+	
 	@PostMapping("/register")
 	public @ResponseBody AccountResponse<Users> createAccount(@RequestBody Users users,Principal prin){
 		AccountResponse<Users> resp = new AccountResponse<>();
